@@ -29,10 +29,8 @@ end
 
 def toMap(crypto_names_array, crypto_prices_array)
     result = Hash.new
-    for name in crypto_names_array do
-        for price in crypto_prices_array do
-            result[name] = price
-        end
+    crypto_names_array.each_with_index do |item, index|
+        result[item] = crypto_prices_array[index]
     end
     return result
 end
