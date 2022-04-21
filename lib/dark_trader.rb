@@ -10,7 +10,8 @@ end
 
 def getSymbols(page)
     crypto_names_array = []
-    symbols = page.xpath('/html/body/div/div/div[2]/div[1]/div[2]/div/div[2]/div[3]/div/table/tbody/tr/td[3]')
+    symbols = page.xpath('//div[@class="cmc-table__table-wrapper-outer"]/div/table/tbody/tr/td[3]')
+    #symbols = page.xpath('/html/body/div/div/div[2]/div[1]/div[2]/div/div[2]/div[3]/div/table/tbody/tr/td[3]')
     for symbol in symbols do
         crypto_names_array.push(symbol.css('div').text)
     end
@@ -19,10 +20,9 @@ end
 
 def getPrices(page)
     crypto_prices_array = []
-    prices = page.xpath('/html/body/div/div/div[2]/div[1]/div[2]/div/div[2]/div[3]/div/table/tbody/tr/td[5]')
+    prices = page.xpath('//div[@class="cmc-table__table-wrapper-outer"]/div/table/tbody/tr/td[5]')
     for price in prices do
         crypto_prices_array.push(price.css('a').text)
-        puts price
     end
     return crypto_prices_array
 end
@@ -44,4 +44,4 @@ def perform
     return result
 end
 
-perform
+puts perform

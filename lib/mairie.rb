@@ -32,4 +32,4 @@ def perform
     return emails_map
 end
 
-perform
+puts perform

@@ -4,7 +4,7 @@ require 'pry'
 
 def get_email(url)  
     page = Nokogiri::HTML(open('http://www2.assemblee-nationale.fr'+url))
-    email = page.xpath('/html/body/div/div[3]/div/div/div/section[1]/div/article/div[3]/div/dl/dd[4]/ul/li[2]/a').text
+    email = page.xpath('//dl[@class="deputes-liste-attributs"]/dd[4]/ul/li[2]/a').text
     return email
 end
 
@@ -13,7 +13,7 @@ def get_names_urls
     lastnames_array = []
     urls_array = []
     page = Nokogiri::HTML(open('http://www2.assemblee-nationale.fr/deputes/liste/tableau'))
-    urls = page.xpath('/html/body/div/div[3]/div/div/section/div/article/div[3]/div/table/tbody/tr/td[1]/a')
+    urls = page.xpath('//table[@class="deputes"]/tbody/tr/td[1]/a')
     for url in urls do
         urls_array.push(url.attr('href'))
         firstnames_array.push(url.text.split(' ')[1])
@@ -36,9 +36,9 @@ def perform
         depute['email'] = email
         emails_map.push(depute)
         puts "Email #{index}/#{urls.length} ajouté"
+        break if index >= 10
     end
-    binding.pry
     return emails_map
 end
 
-perform
+puts perform
