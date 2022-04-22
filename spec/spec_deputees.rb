@@ -12,8 +12,3 @@ describe 'the result of main app' do
     end
 end
 
-describe 'the result of main app' do
-    it 'have 200 results' do
-        expect(perform.length).to equal(577)
-    end
-end
